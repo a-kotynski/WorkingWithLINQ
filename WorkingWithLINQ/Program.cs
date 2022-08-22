@@ -28,7 +28,53 @@ namespace WorkingWithLINQ
                 new Car() { VIN="D4", Make="Ford", Model="Escape", StickerPrice=25000, Year=2008},
                 new Car() { VIN="E5", Make="BMW", Model="55i", StickerPrice=57000, Year=2010}
             };
-            Console.ReadLine();
+
+            // LINQ query syntax
+            /*
+            var bmws = from car in myCars
+                       where car.Make == "BMW"
+                       && car.Year == 2010
+                       select car;
+
+            foreach (var car in bmws)
+            {
+                Console.WriteLine($"{car.Model}, {car.VIN}");
+            }
+            */
+            /*
+            var orderedCars = from car in myCars
+                              orderby car.Year descending
+                              select car;
+            foreach (var car in orderedCars)
+            {
+                Console.WriteLine($"{car.Year}, {car.Model}, {car.VIN}");
+            }
+            */
+
+            // LINQ method syntax
+            // below fat arrow => is a lambda expression
+            /*
+            var bmws = myCars.Where(p => p.Make == "BMW" && p.Year == 2010);
+
+            foreach (var car in bmws)
+            {
+                Console.WriteLine($"{car.Model}, {car.VIN}");
+            }
+            */
+            /*
+            var orderCars = myCars.OrderByDescending(p => p.Year);
+            foreach (var car in orderCars)
+            {
+                Console.WriteLine($"{car.Year}, {car.Model}, {car.VIN}");
+            }
+            */
+
+            //var firstBMW = myCars.OrderByDescending(p => p.Year).First(p => p.Make == "BMW");
+            //Console.WriteLine(firstBMW.VIN);
+
+            Console.WriteLine(myCars.TrueForAll(p => p.Year > 2012));
+
+            Console.ReadLine(); 
         }
     }
 }
